@@ -1,6 +1,36 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
+import React, { useState } from 'react';
+import axios from 'axios';
 
+const App = () => {
+  const [data, setData] = useState(null);
+
+  const fetchData = () => {
+    const token = '0ef4f134-3396-4cda-aa85-5e5aebc4fc0f265b465f-0a98-43f2-b0d6-7df4e233465a';
+  
+    axios.get('https://api.toshl.com/me', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+      .then(response => {
+        // handle success
+        setData(response.data);
+      })
+      .catch(error => {
+        // handle error
+        console.log(error);
+      });
+  }
+
+  return (
+    <div>
+      <button onClick={fetchData}>Fetch Data</button>
+      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
+    </div>
+  );
+}
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
