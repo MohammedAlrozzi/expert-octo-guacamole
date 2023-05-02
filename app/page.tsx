@@ -1,36 +1,6 @@
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
-import React, { useState } from 'react';
-import axios from 'axios';
 
-const App = () => {
-  const [data, setData] = useState(null);
-
-  const fetchData = () => {
-    const token = '0ef4f134-3396-4cda-aa85-5e5aebc4fc0f265b465f-0a98-43f2-b0d6-7df4e233465a';
-  
-    axios.get('https://api.toshl.com/me', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then(response => {
-        // handle success
-        setData(response.data);
-      })
-      .catch(error => {
-        // handle error
-        console.log(error);
-      });
-  }
-
-  return (
-    <div>
-      <button onClick={fetchData}>Fetch Data</button>
-      {data && <pre>{JSON.stringify(data, null, 2)}</pre>}
-    </div>
-  );
-}
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
@@ -59,6 +29,7 @@ export default function Home() {
             />
           </a>
         </div>
+     
       </div>
 
       <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px]">
